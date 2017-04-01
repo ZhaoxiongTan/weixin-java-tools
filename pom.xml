@@ -72,7 +72,7 @@
   <properties>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
-    
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <downloadJavadocs>true</downloadJavadocs>
     <downloadSources>true</downloadSources>
@@ -188,14 +188,27 @@
     </dependencies>
   </dependencyManagement>
 
+  <!--<distributionManagement>-->
+    <!--<snapshotRepository>-->
+      <!--<id>ossrh</id>-->
+      <!--<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+    <!--</snapshotRepository>-->
+    <!--<repository>-->
+      <!--<id>ossrh</id>-->
+      <!--<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+    <!--</repository>-->
+  <!--</distributionManagement>-->
+  <!-- 配置部署的远程仓库 -->
   <distributionManagement>
     <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <id>Snapshots</id>
+      <name>nexus distribution snapshots repository</name>
+      <url>http://59.172.5.182:18081/content/repositories/snapshots/</url>
     </snapshotRepository>
     <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <id>Releases</id>
+      <name>nexus distribution releases repository</name>
+      <url>http://59.172.5.182:18081/content/repositories/releases/</url>
     </repository>
   </distributionManagement>
 
@@ -240,25 +253,25 @@
               </execution>
             </executions>
             <configuration>
-              <additionalparam>${javadoc.opts}</additionalparam>
+              <additionalparam>-Xdoclint:none</additionalparam>
               <charset>UTF-8</charset>
               <locale>zh_CN</locale>
             </configuration>
           </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.5</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
+          <!--<plugin>-->
+          <!--<groupId>org.apache.maven.plugins</groupId>-->
+          <!--<artifactId>maven-gpg-plugin</artifactId>-->
+          <!--<version>1.5</version>-->
+          <!--<executions>-->
+          <!--<execution>-->
+          <!--<id>sign-artifacts</id>-->
+          <!--<phase>verify</phase>-->
+          <!--<goals>-->
+          <!--<goal>sign</goal>-->
+          <!--</goals>-->
+          <!--</execution>-->
+          <!--</executions>-->
+          <!--</plugin>-->
         </plugins>
       </build>
     </profile>
